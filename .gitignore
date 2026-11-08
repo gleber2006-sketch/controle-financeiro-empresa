@@ -1,0 +1,46 @@
+# ==============================================================================
+# .gitignore — Meu Controle Financeiro
+# ==============================================================================
+
+# Credenciais, segredos e tokens sensíveis
+.clasprc.json
+.env
+.env.*
+*.token
+credentials.json
+client_secret*.json
+
+# Dependências e módulos locais
+node_modules/
+.npm/
+
+# Planilhas e arquivos de dados financeiros (nunca versionar dados reais)
+*.xlsx
+*.xls
+*.xlsm
+*.xlsb
+*.csv
+*.ods
+*.tsv
+backups/
+dump/
+export/
+
+# Logs e temporários
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.temp/
+tmp/
+
+# Configurações de sistema e IDEs
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+*.sublime-workspace
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
