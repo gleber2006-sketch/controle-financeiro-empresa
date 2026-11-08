@@ -62,3 +62,4 @@ Ao confirmar as decisões acima, o proprietário concede autorização para a re
 
 * **Etapa 1:** Criação da planilha de testes isolada (`CF_Testes`), configuração do repositório Git privado, implantação do esqueleto standalone do Google Apps Script com configuração restrita `access: "MYSELF"`, renderização da casca da interface e execução da bateria de testes de intrusão e autenticação.
 * **Garantia:** A futura planilha de produção permanecerá não criada até a conclusão das etapas de homologação. As planilhas antigas permanecerão intocadas em modo somente leitura.
+

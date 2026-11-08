@@ -79,3 +79,4 @@ A Etapa 1 será dada como concluída e aprovada somente quando:
 - [ ] O Web App estiver implantado com status `access: "MYSELF"`.
 - [ ] A matriz de testes de segurança for 100% aprovada pelo proprietário.
 - [ ] A tela inicial carregar fluidamente em celulares e computadores.
+
