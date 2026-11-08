@@ -1,0 +1,93 @@
+<script>
+  /**
+   * ==============================================================================
+   * JsCore.html — Meu Controle Financeiro
+   * Motor de Comunicação Assíncrona e Gestão de Estado
+   * ==============================================================================
+   */
+
+  // Estado Global do Cliente
+  const AppState = {
+    versao: 'v0.1.0',
+    ambiente: 'CF_Testes',
+    dadosServidor: null,
+    carregando: false
+  };
+
+  /**
+   * Envelopa chamadas de google.script.run em Promises nativas.
+   * 
+   * @param {string} serverMethod Nome do método no Apps Script.
+   * @param {any} payload Dados opcionais passados como argumento.
+   * @return {Promise<any>} Promessa resolvida com os dados do servidor.
+   */
+  function callServer(serverMethod, payload) {
+    return new Promise((resolve, reject) => {
+      if (typeof google === 'undefined' || !google.script || !google.script.run) {
+        console.warn('[DEV MOCK] google.script.run não disponível neste contexto local.');
+        return resolve({ mock: true, timestamp: new Date().toISOString() });
+      }
+
+      google.script.run
+        .withSuccessHandler((response) => {
+          if (response && response.sucesso) {
+            resolve(response.dados);
+          } else {
+            const msg = response && response.erro ? response.erro : 'Erro desconhecido retornado pelo servidor.';
+            console.error('[ERRO SERVIDOR]', msg);
+            reject(new Error(msg));
+          }
+        })
+        .withFailureHandler((err) => {
+          console.error('[FALHA RPC]', err);
+          reject(err);
+        })[serverMethod](payload);
+    });
+  }
+
+  /**
+   * Formata valor armazenado em centavos para string monetária em Real (BRL).
+   * 
+   * @param {number} centavos Valor inteiro em centavos.
+   * @return {string} Valor formatado (ex.: "R$ 1.250,50").
+   */
+  function formatMoney(centavos) {
+    if (typeof centavos !== 'number' || isNaN(centavos)) centavos = 0;
+    return (centavos / 100).toLocaleString('pt-BR', {
+      style: 'currency',
+      currency: 'BRL'
+    });
+  }
+
+  /**
+   * Inicialização da aplicação ao carregar a página.
+   */
+  window.addEventListener('DOMContentLoaded', async () => {
+    console.log('[APP] Inicializando Meu Controle Financeiro...');
+    
+    try {
+      const status = await callServer('apiObterStatusSistema');
+      console.log('[APP] Status recebido:', status);
+      
+      AppState.dadosServidor = status;
+      
+      // Atualiza os elementos visuais
+      const elStatus = document.getElementById('live-server-status');
+      if (elStatus) elStatus.textContent = 'Conectado e Seguro';
+      
+      const elData = document.getElementById('live-server-date');
+      if (elData && status.dataServidor) elData.textContent = status.dataServidor;
+      
+      const elOwner = document.getElementById('live-server-owner');
+      if (elOwner && status.owner) elOwner.textContent = status.owner;
+      
+    } catch (err) {
+      console.error('[APP] Falha na inicialização:', err);
+      const elStatus = document.getElementById('live-server-status');
+      if (elStatus) {
+        elStatus.textContent = 'Erro de Conexão: ' + err.message;
+        elStatus.style.color = '#ef4444';
+      }
+    }
+  });
+</script>

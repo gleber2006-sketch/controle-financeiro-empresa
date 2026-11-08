@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Meu Controle Financeiro</title>
+  <?!= include('CssGlobal'); ?>
+</head>
+<body>
+  <div class="app-container">
+    <!-- Barra Lateral de Navegação -->
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-logo">CF</div>
+        <div>
+          <div class="brand-title">Controle Financeiro</div>
+          <div style="font-size: 0.72rem; color: var(--text-muted); font-weight: 600;">EMPRESA</div>
+        </div>
+      </div>
+
+      <ul class="nav-menu">
+        <li><a class="nav-item active" href="#dashboard">📊 Dashboard</a></li>
+        <li><a class="nav-item" href="#lancamentos">💳 Lançamentos</a></li>
+        <li><a class="nav-item" href="#orcamento">🎯 Orçamento Mensal</a></li>
+        <li><a class="nav-item" href="#projetos">📁 Projetos</a></li>
+        <li><a class="nav-item" href="#cadastros">⚙️ Cadastros</a></li>
+      </ul>
+
+      <div class="user-badge">
+        <span class="user-badge-label">Conta Conectada</span>
+        <span class="user-badge-email" id="sidebar-user-email"><?= initialData.ownerEmail ?></span>
+        <span style="font-size: 0.7rem; color: #10b981; font-weight: 700;">● Protegido por MYSELF</span>
+      </div>
+    </aside>
+
+    <!-- Conteúdo Principal -->
+    <main class="main-content">
+      <header class="topbar">
+        <div class="page-title">Visão Geral — Etapa 1</div>
+        <div class="status-tag">
+          <span style="width: 8px; height: 8px; background-color: var(--success); border-radius: 50%;"></span>
+          <span>Ambiente de Testes Isolado</span>
+        </div>
+      </header>
+
+      <section class="content-body">
+        <!-- Cards de Indicadores Iniciais (KPIs) -->
+        <div class="card-grid">
+          <div class="kpi-card">
+            <div class="kpi-title">Saldo Real da Empresa</div>
+            <div class="kpi-value">R$ 0,00</div>
+            <div class="kpi-subtitle">Aguardando dados da Etapa 2</div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-title">Disponível Operacional Livre</div>
+            <div class="kpi-value" style="color: var(--primary);">R$ 0,00</div>
+            <div class="kpi-subtitle">Total menos reservas alocadas</div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-title">Reservas Alocadas</div>
+            <div class="kpi-value" style="color: var(--warning);">R$ 0,00</div>
+            <div class="kpi-subtitle">Caixinhas virtuais ativas</div>
+          </div>
+        </div>
+
+        <!-- Painel de Diagnóstico do Sistema (Etapa 1) -->
+        <div class="system-status-box">
+          <h2 class="section-title">Validação do Esqueleto Seguro (Etapa 1)</h2>
+          <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px;">
+            Este painel confirma a integridade da comunicação entre o frontend e a camada de segurança no Google Apps Script.
+          </p>
+
+          <div class="status-row">
+            <span class="status-key">Status da Conexão Backend:</span>
+            <span class="status-val" id="live-server-status" style="color: var(--primary);">Conectando via RPC...</span>
+          </div>
+
+          <div class="status-row">
+            <span class="status-key">Conta Proprietária Autorizada:</span>
+            <span class="status-val" id="live-server-owner"><?= initialData.ownerEmail ?></span>
+          </div>
+
+          <div class="status-row">
+            <span class="status-key">Fuso Horário Operacional:</span>
+            <span class="status-val">America/Sao_Paulo (GMT-3)</span>
+          </div>
+
+          <div class="status-row">
+            <span class="status-key">Moeda Oficial:</span>
+            <span class="status-val">Real Brasileiro (BRL em centavos inteiros)</span>
+          </div>
+
+          <div class="status-row">
+            <span class="status-key">Carimbo do Servidor:</span>
+            <span class="status-val" id="live-server-date">Sincronizando...</span>
+          </div>
+
+          <div class="status-row">
+            <span class="status-key">Política de Acesso Ativa:</span>
+            <span class="status-val" style="color: var(--success);">Restrito Exclusivamente à Conta do Proprietário (MYSELF)</span>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <?!= include('JsCore'); ?>
+</body>
+</html>
