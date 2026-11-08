@@ -1,0 +1,18 @@
+# ==============================================================================
+# .claspignore — Meu Controle Financeiro
+# Define quais arquivos NÃO devem ser enviados ao Google Apps Script
+# ==============================================================================
+
+# Ignorar documentação e markdown
+**/*.md
+
+# Ignorar testes unitários e de integração
+**/*.test.*
+**/*.spec.*
+
+# Ignorar arquivos de sistema e temporários
+.DS_Store
+Thumbs.db
+*.bak
+*.tmp
+
