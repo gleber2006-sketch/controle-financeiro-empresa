@@ -45,3 +45,4 @@ Os seguintes arquivos em [`src/`](../src) serão enviados para o seu Google Apps
 * `Index.html` — Shell principal responsivo da aplicação web.
 * `CssGlobal.html` — Estilos visuais profissionais.
 * `JsCore.html` — Motor de promessas e máscaras de valores em centavos.
+
